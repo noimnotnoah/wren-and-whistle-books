@@ -79,18 +79,26 @@
       padding: 5rem 0 4rem;
       position: relative;
       overflow: hidden;
+      background-image: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200');
+      background-size: cover;
+      background-position: center 30%;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Background pattern — tiny dots + subtle wren silhouette */
+    /* Dark overlay for readability */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 40%, rgba(13, 124, 124, 0.04) 0, transparent 50%),
-        radial-gradient(circle at 80% 60%, rgba(232, 93, 74, 0.04) 0, transparent 50%),
-        radial-gradient(circle, rgba(13, 124, 124, 0.06) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 20px 20px;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.35) 0%,
+        rgba(0, 0, 0, 0.50) 100%
+      );
       pointer-events: none;
     }
 
@@ -107,13 +115,14 @@
       font-size: 3.2rem;
       font-weight: 700;
       font-variation-settings: 'opsz' 72;
-      color: #0d7c7c;
+      color: #ffffff;
       line-height: 1.1;
       letter-spacing: -0.02em;
       position: relative;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
-    .hero h1 .coral-text { color: #e85d4a; }
+    .hero h1 .coral-text { color: #f7a58c; }
 
     .hero .tagline {
       font-family: 'Fraunces', Georgia, serif;
@@ -121,16 +130,17 @@
       font-weight: 400;
       font-style: italic;
       font-variation-settings: 'opsz' 36;
-      color: #7a6a5e;
+      color: rgba(255, 255, 255, 0.9);
       margin-top: 0.75rem;
       max-width: 480px;
       margin-left: auto;
       margin-right: auto;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     }
 
     .hero .location {
       font-size: 0.9rem;
-      color: #8a7a6e;
+      color: rgba(255, 255, 255, 0.7);
       margin-top: 0.5rem;
       letter-spacing: 0.03em;
       text-transform: uppercase;
@@ -140,7 +150,7 @@
     .hero .location::before,
     .hero .location::after {
       content: ' — ';
-      color: rgba(232, 93, 74, 0.3);
+      color: rgba(255, 255, 255, 0.3);
     }
 
     .hero-cta {
@@ -184,6 +194,18 @@
       border-color: #0d7c7c;
       color: #0d7c7c;
       transform: translateY(-2px);
+    }
+
+    /* Button in hero — white border over background image */
+    .hero .btn-secondary {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .hero .btn-secondary:hover {
+      border-color: #ffffff;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
     }
 
     /* ===== Section headings ===== */
@@ -545,7 +567,7 @@
     @media (max-width: 600px) {
       .nav-links { display: none; }
       .hero h1 { font-size: 1.9rem; }
-      .hero { padding: 3rem 0 2.5rem; }
+      .hero { padding: 2.5rem 0 2rem; min-height: 360px; }
       .pricing-grid { grid-template-columns: 1fr; }
       .section-heading h2 { font-size: 1.5rem; }
       .page { padding: 0 1rem; }
@@ -575,7 +597,7 @@
     <!-- Small wren SVG icon -->
     <svg class="hero-wren" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M6 26 C2 22, 0 18, 2 14 C4 10, 10 6, 18 4 C20 2, 24 0, 28 0 C30 0, 34 2, 36 4 C38 6, 38 10, 36 12 C34 14, 30 16, 28 18 L34 20 C38 22, 40 26, 38 30 L34 28 C30 26, 26 26, 22 28 L18 30 C14 32, 8 32, 6 28 L6 26Z"
-            fill="#0d7c7c" stroke="none"/>
+            fill="#ffffff" stroke="none"/>
       <circle cx="16" cy="6" r="1.2" fill="#fff8f0"/>
     </svg>
 
