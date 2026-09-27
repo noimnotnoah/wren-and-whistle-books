@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wren &amp; Whistle Books — Sarah's Children's Picture Books</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ---- Reset & Base ---- */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #fff8f0;
+      color: #3a2e28;
+      font-family: 'Atkinson Hyperlegible', Georgia, 'Times New Roman', serif;
+      font-size: 1.125rem;
+      line-height: 1.7;
+      padding: 2rem 1.25rem;
+      min-height: 100vh;
+    }
+
+    /* ---- Hand-drawn decorative dividers ---- */
+    .divider {
+      width: 100%;
+      max-width: 480px;
+      height: 28px;
+      margin: 3rem auto;
+      display: block;
+    }
+
+    /* ---- Layout wrapper ---- */
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      text-align: center;
+      padding: 3rem 0 1.5rem;
+      position: relative;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 76px;
+      height: 76px;
+      background:
+        radial-gradient(circle at 25% 25%, #0d7c7c 1px, transparent 1px),
+        radial-gradient(circle at 75% 25%, #0d7c7c 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, #0d7c7c 1.2px, transparent 1.2px),
+        radial-gradient(circle at 25% 75%, #e85d4a 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, #e85d4a 1px, transparent 1px);
+      background-size: 12px 12px;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    .header-h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2.6rem;
+      font-weight: 600;
+      font-variation-settings: 'opsz' 72;
+      line-height: 1.15;
+      color: #0d7c7c;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.35rem;
+    }
+
+    .header-h1 span {
+      display: inline-block;
+      position: relative;
+    }
+
+    /* hand-drawn squiggly underline on the brand name */
+    .header-h1 .squiggle {
+      position: relative;
+    }
+    .header-h1 .squiggle::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 8px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 12'%3E%3Cpath d='M2 8 C20 2, 30 2, 40 8 S60 14, 70 8 S90 2, 100 8 S120 14, 130 8 S150 2, 160 8 S170 12, 178 8' fill='none' stroke='%23e85d4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='0.55'/%3E%3C/svg%3E") repeat-x;
+      background-size: 180px 12px;
+    }
+
+    .header-sub {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      font-style: italic;
+      font-variation-settings: 'opsz' 36;
+      color: #6b5b50;
+      margin-top: 0.6rem;
+      letter-spacing: 0.01em;
+    }
+
+    /* ---- Section headings ---- */
+    h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 600;
+      font-variation-settings: 'opsz' 48;
+      color: #0d7c7c;
+      margin-bottom: 0.75rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Little wren-tail decoration before each section heading */
+    h2::before {
+      content: '✦';
+      font-size: 0.65rem;
+      color: #e85d4a;
+      margin-right: 0.55rem;
+      vertical-align: middle;
+      opacity: 0.7;
+    }
+
+    /* ---- Section spacing ---- */
+    section {
+      margin-bottom: 3.2rem;
+    }
+
+    /* ---- About section ---- */
+    .about p {
+      font-size: 1.1rem;
+      max-width: 600px;
+    }
+
+    .about p + p {
+      margin-top: 1rem;
+    }
+
+    /* ---- Books list ---- */
+    .books-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .books-list li {
+      padding: 1.6rem 1.5rem;
+      margin-bottom: 1rem;
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 18px 8px 18px 8px;
+      position: relative;
+      border: 1.5px solid rgba(13, 124, 124, 0.12);
+      box-shadow:
+        4px 6px 0 -1px #fff8f0,
+        4px 6px 0 0 rgba(13, 124, 124, 0.08);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .books-list li:hover {
+      box-shadow:
+        5px 8px 0 -1px #fff8f0,
+        5px 8px 0 0 rgba(13, 124, 124, 0.15);
+    }
+
+    .book-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0d7c7c;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .book-desc {
+      color: #4a3f38;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .book-desc em {
+      font-style: italic;
+    }
+
+    /* ---- Prices ---- */
+    .prices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 0.3rem;
+    }
+
+    .price-card {
+      flex: 1 1 180px;
+      background: rgba(13, 124, 124, 0.045);
+      border-radius: 16px 6px 16px 6px;
+      padding: 1.25rem 1.4rem;
+      border: 1.5px solid rgba(13, 124, 124, 0.1);
+      text-align: center;
+    }
+
+    .price-amount {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #e85d4a;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .price-label {
+      font-size: 0.95rem;
+      color: #5a4e46;
+      margin-top: 0.25rem;
+      line-height: 1.4;
+    }
+
+    .payment-note {
+      margin-top: 0.9rem;
+      font-size: 0.95rem;
+      color: #6b5b50;
+      font-style: italic;
+    }
+
+    /* ---- School visits ---- */
+    .visits-highlight {
+      background: rgba(232, 93, 74, 0.05);
+      border-radius: 16px 6px 16px 6px;
+      padding: 1.5rem 1.6rem;
+      border: 1.5px solid rgba(232, 93, 74, 0.12);
+      margin-top: 0.2rem;
+    }
+
+    .visits-highlight strong {
+      color: #e85d4a;
+      font-weight: 600;
+    }
+
+    /* ---- Contact / email ---- */
+    .contact-email {
+      display: inline-block;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #0d7c7c;
+      text-decoration: none;
+      padding: 0.5rem 0.8rem 0.5rem 0;
+      border-bottom: 3px solid rgba(232, 93, 74, 0.25);
+      transition: border-color 0.2s;
+    }
+
+    .contact-email:hover {
+      border-bottom-color: #e85d4a;
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #8a7a6e;
+      padding: 2.5rem 0 1rem;
+      border-top: 1px solid rgba(13, 124, 124, 0.08);
+    }
+
+    /* ---- Hand-drawn SVG bird silhouette (wren) ---- */
+    .wren-icon {
+      display: block;
+      width: 52px;
+      height: auto;
+      margin: 0 auto 1.4rem;
+      opacity: 0.35;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 480px) {
+      body { padding: 1.5rem 1rem; }
+      .header-h1 { font-size: 1.95rem; }
+      .header-sub { font-size: 1rem; }
+      h2 { font-size: 1.35rem; }
+      .books-list li { padding: 1.2rem 1.1rem; }
+      .prices { flex-direction: column; gap: 0.8rem; }
+      .price-card { flex: 1 1 auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <h1 class="header-h1">
+      <span class="squiggle">Wren &amp; Whistle Books.</span>
+    </h1>
+    <p class="header-sub">Children&rsquo;s picture books. Written in Honiton.</p>
+  </header>
+
+  <svg class="divider" viewBox="0 0 320 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 14 C30 6, 50 6, 60 14 S80 22, 90 14 S110 6, 120 14 S140 22, 150 14 S170 6, 180 14 S200 22, 210 14 S230 6, 240 14 S260 22, 270 14 S290 6, 304 14"
+          stroke="#0d7c7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
+    <circle cx="160" cy="12" r="2" fill="#e85d4a" opacity="0.3"/>
+  </svg>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about">
+    <h2>About</h2>
+    <p>
+      Sarah writes children&rsquo;s picture books for ages 3&ndash;6 from her home in
+         Honiton, Devon. With a BA in English Literature and four years of
+      storytelling behind her, she creates warm, playful tales that feel
+      right at home in a small village&nbsp;&mdash;&nbsp;because they are.
+    </p>
+    <p>
+      Every book is self-published, hands-on from first draft to final page,
+      and illustrated by the wonderfully talented Emma from nearby Honiton.
+    </p>
+  </section>
+
+  <svg class="divider" viewBox="0 0 320 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 14 C30 6, 50 6, 60 14 S80 22, 90 14 S110 6, 120 14 S140 22, 150 14 S170 6, 180 14 S200 22, 210 14 S230 6, 240 14 S260 22, 270 14 S290 6, 304 14"
+          stroke="#0d7c7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
+    <circle cx="160" cy="12" r="2" fill="#e85d4a" opacity="0.3"/>
+  </svg>
+
+  <!-- ============ THE BOOKS ============ -->
+  <section>
+    <h2>The books</h2>
+    <ul class="books-list">
+      <li>
+        <span class="book-title">The Hedgehog Who Couldn&rsquo;t Hibernate</span>
+        <p class="book-desc">
+          A hedgehog stays awake all winter and discovers a world
+          her sleeping friends have never seen.
+        </p>
+      </li>
+      <li>
+        <span class="book-title">Barnaby&rsquo;s Kite</span>
+        <p class="book-desc">
+          A boy and his kite soar over the Devon hills in a story
+          about letting go and looking&nbsp;up.
+        </p>
+      </li>
+      <li>
+        <span class="book-title">The Mud Pie Competition</span>
+        <p class="book-desc">
+          A village fete contest goes gloriously wrong when
+          mud pies, judging, and a very wet dog collide.
+        </p>
+      </li>
+    </ul>
+  </section>
+
+  <svg class="divider" viewBox="0 0 320 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 14 C30 6, 50 6, 60 14 S80 22, 90 14 S110 6, 120 14 S140 22, 150 14 S170 6, 180 14 S200 22, 210 14 S230 6, 240 14 S260 22, 270 14 S290 6, 304 14"
+          stroke="#0d7c7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
+    <circle cx="160" cy="12" r="2" fill="#e85d4a" opacity="0.3"/>
+  </svg>
+
+  <!-- ============ PRICES ============ -->
+  <section>
+    <h2>Prices</h2>
+    <div class="prices">
+      <div class="price-card">
+        <div class="price-amount">&pound;8</div>
+        <div class="price-label">per book</div>
+      </div>
+      <div class="price-card">
+        <div class="price-amount">&pound;20</div>
+        <div class="price-label">signed set of&nbsp;3</div>
+      </div>
+    </div>
+    <p class="payment-note">Cash or bank transfer. Available at local school fairs, on Etsy, or by getting in touch directly.</p>
+  </section>
+
+  <svg class="divider" viewBox="0 0 320 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 14 C30 6, 50 6, 60 14 S80 22, 90 14 S110 6, 120 14 S140 22, 150 14 S170 6, 180 14 S200 22, 210 14 S230 6, 240 14 S260 22, 270 14 S290 6, 304 14"
+          stroke="#0d7c7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
+    <circle cx="160" cy="12" r="2" fill="#e85d4a" opacity="0.3"/>
+  </svg>
+
+  <!-- ============ SCHOOL VISITS ============ -->
+  <section>
+    <h2>School visits</h2>
+    <div class="visits-highlight">
+      <p>
+        Sarah comes to <strong>your school</strong> for the morning:
+        a story-time reading of one of her books, followed by a
+        hands-on craft activity that brings the story to life.
+        <strong>&pound;60 per morning</strong>, covering East Devon.
+      </p>
+    </div>
+  </section>
+
+  <svg class="divider" viewBox="0 0 320 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 14 C30 6, 50 6, 60 14 S80 22, 90 14 S110 6, 120 14 S140 22, 150 14 S170 6, 180 14 S200 22, 210 14 S230 6, 240 14 S260 22, 270 14 S290 6, 304 14"
+          stroke="#0d7c7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
+    <circle cx="160" cy="12" r="2" fill="#e85d4a" opacity="0.3"/>
+  </svg>
+
+  <!-- ============ CONTACT ============ -->
+  <section>
+    <h2>Get in touch</h2>
+    <p style="margin-bottom: 0.8rem;">
+      Drop Sarah an email &mdash; she&rsquo;d love to hear from you.
+    </p>
+    <a href="mailto:sarah@wrenandwhistle.co.uk" class="contact-email">
+      sarah@wrenandwhistle.co.uk
+    </a>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <p>&copy; Wren &amp; Whistle Books &middot; Honiton, Devon EX14</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
