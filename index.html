@@ -3,420 +3,854 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wren &amp; Whistle Books — Sarah's Children's Picture Books</title>
+  <title>Wren &amp; Whistle Books — Picture Books by Sarah in Honiton</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ---- Reset & Base ---- */
+    /* ===== Reset & Base ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       background-color: #fff8f0;
       color: #3a2e28;
-      font-family: 'Atkinson Hyperlegible', Georgia, 'Times New Roman', serif;
-      font-size: 1.125rem;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 1.0625rem;
       line-height: 1.7;
-      padding: 2rem 1.25rem;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ---- Hand-drawn decorative dividers ---- */
-    .divider {
-      width: 100%;
-      max-width: 480px;
-      height: 28px;
-      margin: 3rem auto;
-      display: block;
+    /* ===== Navigation ===== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 248, 240, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(13, 124, 124, 0.08);
     }
 
-    /* ---- Layout wrapper ---- */
-    .page {
-      max-width: 680px;
+    .nav-inner {
+      max-width: 1040px;
       margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
     }
 
-    /* ---- Header ---- */
-    .header {
+    .nav-brand {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #0d7c7c;
+      text-decoration: none;
+    }
+
+    .nav-brand span { color: #e85d4a; }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #5a4e46;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: #0d7c7c; }
+
+    /* ===== Layout container ===== */
+    .page { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ===== Hero ===== */
+    .hero {
       text-align: center;
-      padding: 3rem 0 1.5rem;
+      padding: 5rem 0 4rem;
       position: relative;
+      overflow: hidden;
     }
 
-    .header::before {
+    /* Background pattern — tiny dots + subtle wren silhouette */
+    .hero::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 76px;
-      height: 76px;
-      background:
-        radial-gradient(circle at 25% 25%, #0d7c7c 1px, transparent 1px),
-        radial-gradient(circle at 75% 25%, #0d7c7c 1px, transparent 1px),
-        radial-gradient(circle at 50% 50%, #0d7c7c 1.2px, transparent 1.2px),
-        radial-gradient(circle at 25% 75%, #e85d4a 1px, transparent 1px),
-        radial-gradient(circle at 75% 75%, #e85d4a 1px, transparent 1px);
-      background-size: 12px 12px;
-      opacity: 0.2;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 40%, rgba(13, 124, 124, 0.04) 0, transparent 50%),
+        radial-gradient(circle at 80% 60%, rgba(232, 93, 74, 0.04) 0, transparent 50%),
+        radial-gradient(circle, rgba(13, 124, 124, 0.06) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 20px 20px;
       pointer-events: none;
     }
 
-    .header-h1 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 2.6rem;
-      font-weight: 600;
-      font-variation-settings: 'opsz' 72;
-      line-height: 1.15;
-      color: #0d7c7c;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.35rem;
-    }
-
-    .header-h1 span {
+    .hero-wren {
       display: inline-block;
-      position: relative;
+      margin-bottom: 1rem;
+      width: 56px;
+      height: auto;
+      opacity: 0.15;
     }
 
-    /* hand-drawn squiggly underline on the brand name */
-    .header-h1 .squiggle {
-      position: relative;
-    }
-    .header-h1 .squiggle::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -2px;
-      height: 8px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 12'%3E%3Cpath d='M2 8 C20 2, 30 2, 40 8 S60 14, 70 8 S90 2, 100 8 S120 14, 130 8 S150 2, 160 8 S170 12, 178 8' fill='none' stroke='%23e85d4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='0.55'/%3E%3C/svg%3E") repeat-x;
-      background-size: 180px 12px;
-    }
-
-    .header-sub {
+    .hero h1 {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.2rem;
+      font-size: 3.2rem;
+      font-weight: 700;
+      font-variation-settings: 'opsz' 72;
+      color: #0d7c7c;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    .hero h1 .coral-text { color: #e85d4a; }
+
+    .hero .tagline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.25rem;
       font-weight: 400;
       font-style: italic;
       font-variation-settings: 'opsz' 36;
-      color: #6b5b50;
-      margin-top: 0.6rem;
-      letter-spacing: 0.01em;
+      color: #7a6a5e;
+      margin-top: 0.75rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* ---- Section headings ---- */
-    h2 {
+    .hero .location {
+      font-size: 0.9rem;
+      color: #8a7a6e;
+      margin-top: 0.5rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .hero .location::before,
+    .hero .location::after {
+      content: ' — ';
+      color: rgba(232, 93, 74, 0.3);
+    }
+
+    .hero-cta {
+      margin-top: 2rem;
+      display: inline-flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #0d7c7c;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(13, 124, 124, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: #0a6565;
+      box-shadow: 0 6px 20px rgba(13, 124, 124, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #5a4e46;
+      border: 1.5px solid rgba(13, 124, 124, 0.2);
+    }
+
+    .btn-secondary:hover {
+      border-color: #0d7c7c;
+      color: #0d7c7c;
+      transform: translateY(-2px);
+    }
+
+    /* ===== Section headings ===== */
+    .section-heading {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-heading h2 {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.65rem;
+      font-size: 2rem;
       font-weight: 600;
       font-variation-settings: 'opsz' 48;
       color: #0d7c7c;
-      margin-bottom: 0.75rem;
-      position: relative;
       display: inline-block;
-    }
-
-    /* Little wren-tail decoration before each section heading */
-    h2::before {
-      content: '✦';
-      font-size: 0.65rem;
-      color: #e85d4a;
-      margin-right: 0.55rem;
-      vertical-align: middle;
-      opacity: 0.7;
-    }
-
-    /* ---- Section spacing ---- */
-    section {
-      margin-bottom: 3.2rem;
-    }
-
-    /* ---- About section ---- */
-    .about p {
-      font-size: 1.1rem;
-      max-width: 600px;
-    }
-
-    .about p + p {
-      margin-top: 1rem;
-    }
-
-    /* ---- Books list ---- */
-    .books-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .books-list li {
-      padding: 1.6rem 1.5rem;
-      margin-bottom: 1rem;
-      background: rgba(255, 255, 255, 0.65);
-      border-radius: 18px 8px 18px 8px;
       position: relative;
-      border: 1.5px solid rgba(13, 124, 124, 0.12);
-      box-shadow:
-        4px 6px 0 -1px #fff8f0,
-        4px 6px 0 0 rgba(13, 124, 124, 0.08);
-      transition: box-shadow 0.2s ease;
     }
 
-    .books-list li:hover {
-      box-shadow:
-        5px 8px 0 -1px #fff8f0,
-        5px 8px 0 0 rgba(13, 124, 124, 0.15);
-    }
-
-    .book-title {
-      font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #0d7c7c;
+    .section-heading .ornament {
       display: block;
-      margin-bottom: 0.2rem;
+      margin: 0.5rem auto 0;
+      width: 64px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #e85d4a, transparent);
+      border-radius: 2px;
     }
 
-    .book-desc {
-      color: #4a3f38;
-      font-size: 1rem;
-      line-height: 1.6;
+    /* ===== Books showcase ===== */
+    .books-section {
+      padding: 4rem 0;
+      background: rgba(13, 124, 124, 0.02);
+      border-radius: 32px 32px 0 0;
     }
 
-    .book-desc em {
-      font-style: italic;
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
     }
 
-    /* ---- Prices ---- */
-    .prices {
+    .book-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 2px 12px rgba(13, 124, 124, 0.06),
+        0 8px 32px rgba(13, 124, 124, 0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
+      flex-direction: column;
+    }
+
+    .book-card:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 4px 20px rgba(13, 124, 124, 0.10),
+        0 12px 40px rgba(13, 124, 124, 0.06);
+    }
+
+    .book-cover {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .book-cover-hhg { background: linear-gradient(145deg, #1a2a3a, #2c4a5a); }
+    .book-cover-bk  { background: linear-gradient(145deg, #4a8fa8, #6ab0c8); }
+    .book-cover-mpc { background: linear-gradient(145deg, #8a6a3a, #b88a4a); }
+
+    .book-cover svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+
+    .book-cover-label {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: rgba(255,255,255,0.9);
+      padding: 0 0.5rem;
+    }
+
+    .book-cover-label .icon {
+      font-size: 2.4rem;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .book-cover-label .age {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.6;
       margin-top: 0.3rem;
     }
 
-    .price-card {
-      flex: 1 1 180px;
-      background: rgba(13, 124, 124, 0.045);
-      border-radius: 16px 6px 16px 6px;
-      padding: 1.25rem 1.4rem;
-      border: 1.5px solid rgba(13, 124, 124, 0.1);
-      text-align: center;
+    .book-info {
+      padding: 1.25rem 1.25rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    .price-amount {
+    .book-info h3 {
       font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.9rem;
+      font-size: 1.15rem;
       font-weight: 600;
+      color: #0d7c7c;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .book-info p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #5a4e46;
+      flex: 1;
+    }
+
+    .book-info .price-tag {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 600;
+      font-size: 1.1rem;
       color: #e85d4a;
-      letter-spacing: -0.02em;
+      margin-top: 0.75rem;
+    }
+
+    /* ===== Pricing ===== */
+    .pricing-section {
+      padding: 4rem 0;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow:
+        0 2px 12px rgba(13, 124, 124, 0.06),
+        0 8px 32px rgba(13, 124, 124, 0.04);
+      transition: transform 0.25s ease;
+    }
+
+    .pricing-card:hover { transform: translateY(-3px); }
+
+    .pricing-card.featured {
+      background: #0d7c7c;
+      color: #fff;
+    }
+
+    .pricing-card.featured .pricing-amount { color: #fff; }
+    .pricing-card.featured .pricing-label { color: rgba(255,255,255,0.8); }
+
+    .pricing-amount {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: #e85d4a;
       line-height: 1;
     }
 
-    .price-label {
-      font-size: 0.95rem;
-      color: #5a4e46;
-      margin-top: 0.25rem;
-      line-height: 1.4;
+    .pricing-label {
+      font-size: 0.9rem;
+      color: #6b5b50;
+      margin-top: 0.5rem;
     }
 
-    .payment-note {
-      margin-top: 0.9rem;
-      font-size: 0.95rem;
+    .pricing-detail {
+      font-size: 0.8rem;
+      color: #8a7a6e;
+      margin-top: 0.4rem;
+    }
+
+    .pricing-note {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
       color: #6b5b50;
       font-style: italic;
     }
 
-    /* ---- School visits ---- */
-    .visits-highlight {
-      background: rgba(232, 93, 74, 0.05);
-      border-radius: 16px 6px 16px 6px;
-      padding: 1.5rem 1.6rem;
-      border: 1.5px solid rgba(232, 93, 74, 0.12);
-      margin-top: 0.2rem;
+    /* ===== School Visits ===== */
+    .school-section {
+      padding: 4rem 0;
+      background: linear-gradient(135deg, rgba(232, 93, 74, 0.04) 0%, rgba(13, 124, 124, 0.04) 100%);
+      border-radius: 0 0 32px 32px;
     }
 
-    .visits-highlight strong {
+    .school-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .school-content h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0d7c7c;
+      margin-bottom: 1rem;
+    }
+
+    .school-content .highlight {
+      background: rgba(232, 93, 74, 0.1);
       color: #e85d4a;
       font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
     }
 
-    /* ---- Contact / email ---- */
+    .school-content ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .school-content ul li {
+      padding: 0.4rem 0;
+      font-size: 0.95rem;
+    }
+
+    .school-content ul li::before {
+      content: '✦ ';
+      color: #e85d4a;
+      font-size: 0.7rem;
+    }
+
+    .school-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .school-visual svg {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+    }
+
+    /* ===== About ===== */
+    .about-section {
+      padding: 4rem 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      max-width: 480px;
+    }
+
+    .about-text .sig {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #0d7c7c;
+      margin-top: 1.5rem;
+      font-style: italic;
+    }
+
+    .about-illustration {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-illustration svg {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+    }
+
+    /* ===== Contact ===== */
+    .contact-section {
+      padding: 4rem 0;
+      text-align: center;
+      background: rgba(13, 124, 124, 0.02);
+      border-radius: 32px;
+    }
+
+    .contact-section p {
+      max-width: 440px;
+      margin: 0 auto 1.5rem;
+      color: #6b5b50;
+    }
+
     .contact-email {
       display: inline-block;
       font-family: 'Fraunces', Georgia, serif;
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       font-weight: 600;
       color: #0d7c7c;
       text-decoration: none;
-      padding: 0.5rem 0.8rem 0.5rem 0;
-      border-bottom: 3px solid rgba(232, 93, 74, 0.25);
-      transition: border-color 0.2s;
+      padding: 0.75rem 1.5rem;
+      border: 2px dashed rgba(13, 124, 124, 0.2);
+      border-radius: 40px;
+      transition: all 0.25s ease;
     }
 
     .contact-email:hover {
-      border-bottom-color: #e85d4a;
+      border-color: #e85d4a;
+      background: rgba(232, 93, 74, 0.04);
     }
 
-    /* ---- Footer ---- */
-    .footer {
-      text-align: center;
+    .contact-social {
+      margin-top: 1rem;
       font-size: 0.85rem;
       color: #8a7a6e;
-      padding: 2.5rem 0 1rem;
-      border-top: 1px solid rgba(13, 124, 124, 0.08);
     }
 
-    /* ---- Hand-drawn SVG bird silhouette (wren) ---- */
-    .wren-icon {
+    /* ===== Footer ===== */
+    .footer {
+      text-align: center;
+      padding: 2.5rem 0 1.5rem;
+      font-size: 0.8rem;
+      color: #9a8a7e;
+      border-top: 1px solid rgba(13, 124, 124, 0.06);
+      margin-top: 1rem;
+    }
+
+    .footer .footer-wren {
       display: block;
-      width: 52px;
+      width: 32px;
       height: auto;
-      margin: 0 auto 1.4rem;
-      opacity: 0.35;
+      margin: 0 auto 0.75rem;
+      opacity: 0.12;
     }
 
-    /* ---- Responsive ---- */
-    @media (max-width: 480px) {
-      body { padding: 1.5rem 1rem; }
-      .header-h1 { font-size: 1.95rem; }
-      .header-sub { font-size: 1rem; }
-      h2 { font-size: 1.35rem; }
-      .books-list li { padding: 1.2rem 1.1rem; }
-      .prices { flex-direction: column; gap: 0.8rem; }
-      .price-card { flex: 1 1 auto; }
+    /* ===== Responsive ===== */
+    @media (max-width: 820px) {
+      .books-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+      .school-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.4rem; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 1.9rem; }
+      .hero { padding: 3rem 0 2.5rem; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .section-heading h2 { font-size: 1.5rem; }
+      .page { padding: 0 1rem; }
     }
   </style>
 </head>
 <body>
 
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Wren <span>&amp;</span> Whistle</a>
+    <ul class="nav-links">
+      <li><a href="#books">Books</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#school">School Visits</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
 <div class="page">
 
-  <!-- ============ HEADER ============ -->
-  <header class="header">
-    <h1 class="header-h1">
-      <span class="squiggle">Wren &amp; Whistle Books.</span>
-    </h1>
-    <p class="header-sub">Children&rsquo;s picture books. Written in Honiton.</p>
-  </header>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <!-- Small wren SVG icon -->
+    <svg class="hero-wren" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M6 26 C2 22, 0 18, 2 14 C4 10, 10 6, 18 4 C20 2, 24 0, 28 0 C30 0, 34 2, 36 4 C38 6, 38 10, 36 12 C34 14, 30 16, 28 18 L34 20 C38 22, 40 26, 38 30 L34 28 C30 26, 26 26, 22 28 L18 30 C14 32, 8 32, 6 28 L6 26Z"
+            fill="#0d7c7c" stroke="none"/>
+      <circle cx="16" cy="6" r="1.2" fill="#fff8f0"/>
+    </svg>
 
-  <svg class="divider" viewBox="0 0 320 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M10 14 C30 6, 50 6, 60 14 S80 22, 90 14 S110 6, 120 14 S140 22, 150 14 S170 6, 180 14 S200 22, 210 14 S230 6, 240 14 S260 22, 270 14 S290 6, 304 14"
-          stroke="#0d7c7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-    <circle cx="160" cy="12" r="2" fill="#e85d4a" opacity="0.3"/>
-  </svg>
-
-  <!-- ============ ABOUT ============ -->
-  <section class="about">
-    <h2>About</h2>
-    <p>
-      Sarah writes children&rsquo;s picture books for ages 3&ndash;6 from her home in
-         Honiton, Devon. With a BA in English Literature and four years of
-      storytelling behind her, she creates warm, playful tales that feel
-      right at home in a small village&nbsp;&mdash;&nbsp;because they are.
-    </p>
-    <p>
-      Every book is self-published, hands-on from first draft to final page,
-      and illustrated by the wonderfully talented Emma from nearby Honiton.
-    </p>
-  </section>
-
-  <svg class="divider" viewBox="0 0 320 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M10 14 C30 6, 50 6, 60 14 S80 22, 90 14 S110 6, 120 14 S140 22, 150 14 S170 6, 180 14 S200 22, 210 14 S230 6, 240 14 S260 22, 270 14 S290 6, 304 14"
-          stroke="#0d7c7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-    <circle cx="160" cy="12" r="2" fill="#e85d4a" opacity="0.3"/>
-  </svg>
-
-  <!-- ============ THE BOOKS ============ -->
-  <section>
-    <h2>The books</h2>
-    <ul class="books-list">
-      <li>
-        <span class="book-title">The Hedgehog Who Couldn&rsquo;t Hibernate</span>
-        <p class="book-desc">
-          A hedgehog stays awake all winter and discovers a world
-          her sleeping friends have never seen.
-        </p>
-      </li>
-      <li>
-        <span class="book-title">Barnaby&rsquo;s Kite</span>
-        <p class="book-desc">
-          A boy and his kite soar over the Devon hills in a story
-          about letting go and looking&nbsp;up.
-        </p>
-      </li>
-      <li>
-        <span class="book-title">The Mud Pie Competition</span>
-        <p class="book-desc">
-          A village fete contest goes gloriously wrong when
-          mud pies, judging, and a very wet dog collide.
-        </p>
-      </li>
-    </ul>
-  </section>
-
-  <svg class="divider" viewBox="0 0 320 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M10 14 C30 6, 50 6, 60 14 S80 22, 90 14 S110 6, 120 14 S140 22, 150 14 S170 6, 180 14 S200 22, 210 14 S230 6, 240 14 S260 22, 270 14 S290 6, 304 14"
-          stroke="#0d7c7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-    <circle cx="160" cy="12" r="2" fill="#e85d4a" opacity="0.3"/>
-  </svg>
-
-  <!-- ============ PRICES ============ -->
-  <section>
-    <h2>Prices</h2>
-    <div class="prices">
-      <div class="price-card">
-        <div class="price-amount">&pound;8</div>
-        <div class="price-label">per book</div>
-      </div>
-      <div class="price-card">
-        <div class="price-amount">&pound;20</div>
-        <div class="price-label">signed set of&nbsp;3</div>
-      </div>
-    </div>
-    <p class="payment-note">Cash or bank transfer. Available at local school fairs, on Etsy, or by getting in touch directly.</p>
-  </section>
-
-  <svg class="divider" viewBox="0 0 320 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M10 14 C30 6, 50 6, 60 14 S80 22, 90 14 S110 6, 120 14 S140 22, 150 14 S170 6, 180 14 S200 22, 210 14 S230 6, 240 14 S260 22, 270 14 S290 6, 304 14"
-          stroke="#0d7c7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-    <circle cx="160" cy="12" r="2" fill="#e85d4a" opacity="0.3"/>
-  </svg>
-
-  <!-- ============ SCHOOL VISITS ============ -->
-  <section>
-    <h2>School visits</h2>
-    <div class="visits-highlight">
-      <p>
-        Sarah comes to <strong>your school</strong> for the morning:
-        a story-time reading of one of her books, followed by a
-        hands-on craft activity that brings the story to life.
-        <strong>&pound;60 per morning</strong>, covering East Devon.
-      </p>
+    <h1>Sarah <span class="coral-text">&amp;</span> the Story Books</h1>
+    <p class="tagline">Warm, playful picture books for little readers&nbsp;&mdash;&nbsp;written in Honiton, Devon.</p>
+    <p class="location">Wren &amp; Whistle Books</p>
+    <div class="hero-cta">
+      <a href="#books" class="btn btn-primary">Discover the books</a>
+      <a href="#contact" class="btn btn-secondary">Get in touch</a>
     </div>
   </section>
 
-  <svg class="divider" viewBox="0 0 320 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M10 14 C30 6, 50 6, 60 14 S80 22, 90 14 S110 6, 120 14 S140 22, 150 14 S170 6, 180 14 S200 22, 210 14 S230 6, 240 14 S260 22, 270 14 S290 6, 304 14"
-          stroke="#0d7c7c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-    <circle cx="160" cy="12" r="2" fill="#e85d4a" opacity="0.3"/>
-  </svg>
+  <!-- ===== BOOKS ===== -->
+  <section class="books-section" id="books">
+    <div class="section-heading">
+      <h2>The Books</h2>
+      <span class="ornament"></span>
+    </div>
 
-  <!-- ============ CONTACT ============ -->
-  <section>
-    <h2>Get in touch</h2>
-    <p style="margin-bottom: 0.8rem;">
-      Drop Sarah an email &mdash; she&rsquo;d love to hear from you.
-    </p>
-    <a href="mailto:sarah@wrenandwhistle.co.uk" class="contact-email">
-      sarah@wrenandwhistle.co.uk
-    </a>
+    <div class="books-grid">
+      <!-- Book 1: Hedgehog Couldn't Hibernate -->
+      <div class="book-card">
+        <div class="book-cover book-cover-hhg">
+          <svg viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Moon -->
+            <circle cx="140" cy="40" r="24" fill="rgba(255,255,255,0.15)"/>
+            <!-- Stars -->
+            <circle cx="20" cy="20" r="1.5" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="100" cy="15" r="1.2" fill="rgba(255,255,255,0.35)"/>
+            <circle cx="160" cy="80" r="1" fill="rgba(255,255,255,0.25)"/>
+            <circle cx="30" cy="50" r="0.8" fill="rgba(255,255,255,0.3)"/>
+            <!-- Snowy ground -->
+            <ellipse cx="90" cy="210" rx="100" ry="50" fill="rgba(255,255,255,0.08)"/>
+            <!-- Hedgehog body -->
+            <ellipse cx="80" cy="170" rx="32" ry="22" fill="#8B6F47" transform="rotate(-10 80 170)"/>
+            <!-- Spines -->
+            <path d="M52 155 L44 130 L58 140 M64 148 L62 120 L72 138 M78 145 L80 115 L86 140 M92 148 L96 122 L100 142 M104 155 L112 132 L110 150"
+                  stroke="#4a3828" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+            <!-- Hedgehog face -->
+            <ellipse cx="68" cy="175" rx="8" ry="6" fill="#C4A47A"/>
+            <circle cx="66" cy="174" r="1.2" fill="#2a1a0a"/>
+            <!-- Tiny snowflakes -->
+            <circle cx="35" cy="75" r="1.5" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="120" cy="90" r="1" fill="rgba(255,255,255,0.2)"/>
+            <circle cx="65" cy="65" r="1.3" fill="rgba(255,255,255,0.25)"/>
+            <circle cx="145" cy="120" r="1.2" fill="rgba(255,255,255,0.2)"/>
+            <circle cx="25" cy="130" r="0.8" fill="rgba(255,255,255,0.2)"/>
+          </svg>
+          <div class="book-cover-label">
+            <div class="icon">🦔</div>
+            <div class="age">Ages 3&ndash;6</div>
+          </div>
+        </div>
+        <div class="book-info">
+          <h3>The Hedgehog Who Couldn't Hibernate</h3>
+          <p>A curious hedgehog stays awake through winter and discovers a moonlit world her sleeping friends have never seen.</p>
+          <div class="price-tag">£8</div>
+        </div>
+      </div>
+
+      <!-- Book 2: Barnaby's Kite -->
+      <div class="book-card">
+        <div class="book-cover book-cover-bk">
+          <svg viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Sky gradient overlay -->
+            <rect width="180" height="240" fill="rgba(255,255,255,0.06)"/>
+            <!-- Clouds -->
+            <ellipse cx="50" cy="35" rx="35" ry="14" fill="rgba(255,255,255,0.15)"/>
+            <ellipse cx="140" cy="55" rx="28" ry="10" fill="rgba(255,255,255,0.1)"/>
+            <ellipse cx="90" cy="25" rx="22" ry="8" fill="rgba(255,255,255,0.12)"/>
+            <!-- Kite -->
+            <path d="M90 40 L110 80 L90 120 L70 80 Z" fill="#e85d4a" opacity="0.8"/>
+            <path d="M85 50 L100 80 L85 110 L70 80 Z" fill="#0d7c7c" opacity="0.6"/>
+            <!-- Kite tail -->
+            <path d="M90 120 C85 140, 100 150, 90 170 C80 190, 100 200, 90 215"
+                  stroke="rgba(232,93,74,0.4)" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+            <!-- Kite string -->
+            <line x1="90" y1="40" x2="90" y2="240" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+            <!-- Rolling hills -->
+            <path d="M0 210 Q45 180 90 210 Q135 240 180 210 L180 240 L0 240 Z" fill="rgba(255,255,255,0.06)"/>
+            <path d="M0 225 Q60 200 120 225 Q150 240 180 230 L180 240 L0 240 Z" fill="rgba(255,255,255,0.04)"/>
+            <!-- Sun -->
+            <circle cx="150" cy="30" r="16" fill="rgba(255,255,255,0.12)"/>
+          </svg>
+          <div class="book-cover-label">
+            <div class="icon">🪁</div>
+            <div class="age">Ages 3&ndash;6</div>
+          </div>
+        </div>
+        <div class="book-info">
+          <h3>Barnaby's Kite</h3>
+          <p>A boy and his kite soar over the Devon hills in a gentle story about letting go and looking up.</p>
+          <div class="price-tag">£8</div>
+        </div>
+      </div>
+
+      <!-- Book 3: Mud Pie Competition -->
+      <div class="book-card">
+        <div class="book-cover book-cover-mpc">
+          <svg viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Ground -->
+            <ellipse cx="90" cy="210" rx="110" ry="50" fill="#6B4F2E" opacity="0.2"/>
+            <ellipse cx="90" cy="215" rx="100" ry="40" fill="#5A3F1E" opacity="0.15"/>
+            <!-- Mud pie table -->
+            <rect x="60" y="160" width="80" height="8" rx="2" fill="#8B6F47" opacity="0.5"/>
+            <rect x="70" y="168" width="8" height="35" fill="#8B6F47" opacity="0.4"/>
+            <rect x="122" y="168" width="8" height="35" fill="#8B6F47" opacity="0.4"/>
+            <!-- Mud pie -->
+            <ellipse cx="100" cy="155" rx="22" ry="10" fill="#6B4F2E" opacity="0.6"/>
+            <ellipse cx="100" cy="152" rx="18" ry="7" fill="#7A5F3E" opacity="0.5"/>
+            <!-- Decorations -->
+            <circle cx="92" cy="152" r="2" fill="#B88A4A" opacity="0.7"/>
+            <circle cx="108" cy="150" r="1.5" fill="#B88A4A" opacity="0.6"/>
+            <ellipse cx="100" cy="147" rx="4" ry="1.5" fill="#4A7A3A" opacity="0.5"/>
+            <!-- Dog paw prints -->
+            <ellipse cx="40" cy="190" rx="6" ry="5" fill="rgba(139,111,71,0.25)"/>
+            <ellipse cx="55" cy="188" rx="4" ry="3.5" fill="rgba(139,111,71,0.2)"/>
+            <ellipse cx="140" cy="195" rx="5" ry="4" fill="rgba(139,111,71,0.2)"/>
+            <!-- Balloons -->
+            <ellipse cx="35" cy="60" rx="10" ry="12" fill="#e85d4a" opacity="0.3"/>
+            <line x1="35" y1="72" x2="35" y2="100" stroke="rgba(232,93,74,0.2)" stroke-width="0.8"/>
+            <ellipse cx="150" cy="75" rx="8" ry="10" fill="#0d7c7c" opacity="0.25"/>
+            <line x1="150" y1="85" x2="150" y2="110" stroke="rgba(13,124,124,0.15)" stroke-width="0.8"/>
+          </svg>
+          <div class="book-cover-label">
+            <div class="icon">🥧</div>
+            <div class="age">Ages 3&ndash;6</div>
+          </div>
+        </div>
+        <div class="book-info">
+          <h3>The Mud Pie Competition</h3>
+          <p>A village fete contest goes gloriously wrong when mud pies, judging, and a very wet dog collide.</p>
+          <div class="price-tag">£8</div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- ============ FOOTER ============ -->
+  <!-- ===== PRICING ===== -->
+  <section class="pricing-section" id="pricing">
+    <div class="section-heading">
+      <h2>Pricing</h2>
+      <span class="ornament"></span>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-amount">£8</div>
+        <div class="pricing-label">Single book</div>
+        <div class="pricing-detail">Any title &middot; Signed by Sarah</div>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-amount">£20</div>
+        <div class="pricing-label">Signed set of 3</div>
+        <div class="pricing-detail" style="color:rgba(255,255,255,0.7);">All three books &middot; Save £4</div>
+      </div>
+    </div>
+    <p class="pricing-note">Cash or bank transfer &middot; Available at local fairs, on Etsy, or by getting in touch.</p>
+  </section>
+
+  <!-- ===== SCHOOL VISITS ===== -->
+  <section class="school-section" id="school">
+    <div class="section-heading">
+      <h2>School Visits</h2>
+      <span class="ornament"></span>
+    </div>
+
+    <div class="school-grid">
+      <div class="school-content">
+        <h3>Bring a story to your classroom</h3>
+        <p>Sarah comes to <span class="highlight">your school</span> for a fun, interactive morning:</p>
+        <ul>
+          <li>A live story-time reading of one of her books</li>
+          <li>A hands-on craft activity that brings the story to life</li>
+          <li>Q&amp;A with the children about writing and illustrating</li>
+          <li>Signed book orders for families</li>
+        </ul>
+        <p style="margin-top:1.25rem; font-size:1.1rem;">
+          <strong style="color:#0d7c7c;">£60 per morning</strong>
+          <span style="color:#6b5b50;"> &mdash; covering East Devon schools</span>
+        </p>
+      </div>
+      <div class="school-visual">
+        <svg viewBox="0 0 280 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- School building -->
+          <rect x="40" y="90" width="200" height="130" rx="4" fill="#fff" opacity="0.5"/>
+          <rect x="50" y="100" width="180" height="110" rx="2" fill="none" stroke="#0d7c7c" stroke-width="1.2" opacity="0.3"/>
+          <!-- Roof -->
+          <path d="M35 90 L140 40 L245 90 Z" fill="#0d7c7c" opacity="0.12"/>
+          <!-- Door -->
+          <rect x="120" y="155" width="40" height="55" rx="20 20 0 0" fill="#e85d4a" opacity="0.15"/>
+          <!-- Windows -->
+          <rect x="65" y="115" width="35" height="35" rx="2" fill="#e85d4a" opacity="0.08"/>
+          <rect x="115" y="115" width="50" height="30" rx="2" fill="#e85d4a" opacity="0.08"/>
+          <rect x="180" y="115" width="35" height="35" rx="2" fill="#e85d4a" opacity="0.08"/>
+          <!-- Path -->
+          <path d="M140 210 Q140 220 120 230 Q100 240 140 240 Q180 240 160 230 Q140 220 140 210"
+                fill="#8a7a6e" opacity="0.06"/>
+          <!-- Trees -->
+          <circle cx="30" cy="110" r="25" fill="#0d7c7c" opacity="0.08"/>
+          <rect x="28" y="130" width="4" height="25" fill="#5a4e46" opacity="0.06"/>
+          <circle cx="250" cy="100" r="20" fill="#0d7c7c" opacity="0.06"/>
+          <rect x="248" y="115" width="4" height="20" fill="#5a4e46" opacity="0.05"/>
+          <!-- Book icon -->
+          <rect x="105" y="55" width="30" height="24" rx="2" fill="#e85d4a" opacity="0.2"/>
+          <line x1="112" y1="60" x2="112" y2="75" stroke="#e85d4a" stroke-width="1.5" opacity="0.3"/>
+          <line x1="120" y1="60" x2="120" y2="75" stroke="#e85d4a" stroke-width="1.5" opacity="0.3"/>
+          <line x1="128" y1="60" x2="128" y2="75" stroke="#e85d4a" stroke-width="1.5" opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about-section" id="about">
+    <div class="section-heading">
+      <h2>About Sarah</h2>
+      <span class="ornament"></span>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Sarah writes children's picture books for ages 3&ndash;6 from her home in Honiton, Devon. With a BA in English Literature and years of storytelling behind her, she creates warm, playful tales rooted in the Devon countryside she loves.</p>
+        <p>Every book is self-published, hands-on from first draft to final page, and illustrated by the wonderfully talented Emma from nearby Honiton. The stories are read everywhere &mdash; from bedtime to story-time at village fetes and primary schools across East Devon.</p>
+        <p>Wren &amp; Whistle Books is Sarah's own little publishing house, named for two things she loves: the wrens that hop through her garden, and the whistle of the kettle after a long day writing.</p>
+        <p class="sig">&mdash; Sarah</p>
+      </div>
+      <div class="about-illustration">
+        <svg viewBox="0 0 240 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Quill / pen -->
+          <path d="M120 60 L110 120 L120 130 L130 120 L120 60Z" fill="#0d7c7c" opacity="0.12"/>
+          <path d="M118 64 L118 100" stroke="#0d7c7c" stroke-width="1.5" opacity="0.15"/>
+          <!-- Book stack -->
+          <rect x="80" y="170" width="100" height="14" rx="2" fill="#0d7c7c" opacity="0.06"/>
+          <rect x="85" y="156" width="90" height="14" rx="2" fill="#e85d4a" opacity="0.06"/>
+          <rect x="90" y="142" width="80" height="14" rx="2" fill="#0d7c7c" opacity="0.08"/>
+          <!-- Wren -->
+          <g transform="translate(130, 80)">
+            <ellipse cx="0" cy="0" rx="22" ry="16" fill="#0d7c7c" opacity="0.1"/>
+            <path d="M-10 5 L-22 12 L-10 10 Z" fill="#0d7c7c" opacity="0.08"/>
+            <circle cx="16" cy="-4" r="1.5" fill="#0d7c7c" opacity="0.15"/>
+          </g>
+          <!-- Decorative circles -->
+          <circle cx="50" cy="60" r="4" fill="#e85d4a" opacity="0.06"/>
+          <circle cx="190" cy="70" r="3" fill="#0d7c7c" opacity="0.06"/>
+          <circle cx="55" cy="180" r="2.5" fill="#e85d4a" opacity="0.05"/>
+          <circle cx="185" cy="190" r="2" fill="#0d7c7c" opacity="0.04"/>
+          <!-- Dots along bottom -->
+          <path d="M40 230 L200 230" stroke="#e85d4a" stroke-width="1" stroke-dasharray="4 8" opacity="0.15"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact-section" id="contact">
+    <div class="section-heading" style="margin-bottom:1.5rem;">
+      <h2>Get in Touch</h2>
+      <span class="ornament"></span>
+    </div>
+    <p>Sarah would love to hear from you &mdash; whether you'd like to order a book, arrange a school visit, or just say hello.</p>
+    <a href="mailto:sarah@wrenandwhistle.co.uk" class="contact-email">sarah@wrenandwhistle.co.uk</a>
+    <p class="contact-social">Based in Honiton, Devon &middot; East Devon schools &amp; beyond</p>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
+    <svg class="footer-wren" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M6 26 C2 22, 0 18, 2 14 C4 10, 10 6, 18 4 C20 2, 24 0, 28 0 C30 0, 34 2, 36 4 C38 6, 38 10, 36 12 C34 14, 30 16, 28 18 L34 20 C38 22, 40 26, 38 30 L34 28 C30 26, 26 26, 22 28 L18 30 C14 32, 8 32, 6 28 L6 26Z" fill="#0d7c7c"/>
+    </svg>
     <p>&copy; Wren &amp; Whistle Books &middot; Honiton, Devon EX14</p>
+    <p style="margin-top:0.25rem; opacity:0.6;">Illustrated by Emma &middot; written with love from a small Devon town</p>
   </footer>
 
 </div>
-
 </body>
 </html>
